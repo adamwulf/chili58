@@ -1,0 +1,263 @@
+units:
+  kx: cx
+  ky: cy
+  px: 2
+  py: 2
+points:
+  key:
+    footprints:
+      choc_hotswap:
+        type: choc
+        params:
+          hotswap: true
+          reverse: true
+          keycaps: true
+        nets:
+          # from: P1
+          # to: P2
+          from: =colrow
+          to: =column_net
+      diode:
+        type: diode
+        nets:
+          # from: P3
+          # to: P4
+          from: =colrow
+          to: =row_net
+        anchor:
+          shift: [0, -5]
+  zones:
+    matrix:
+      key.padding: ky
+      anchor:
+        rotate: 0
+      columns:
+        outer:
+          stagger: 0
+          key:
+            column_net: P20
+        pinky:
+          spread: kx
+          stagger: 3
+          key:
+            column_net: P19
+        ring:
+          spread: kx
+          stagger: 5
+          key:
+            column_net: P18
+        middle:
+          spread: kx
+          stagger: 2
+          key:
+            column_net: P17
+        index:
+          spread: kx
+          stagger: -2
+          key:
+            column_net: P16
+        inner:
+          spread: kx
+          stagger: -3
+          key:
+            column_net: P15
+      rows:
+        bottom:
+          key:
+            row_net: P7
+        home:
+          spread: cy
+          key:
+            row_net: P6
+        top:
+          key:
+            row_net: P5
+        stretch:
+          key:
+            row_net: P4
+    bonus:
+      anchor:
+        ref: matrix_pinky_home
+        shift: [5kx, -8]
+      columns:
+        stretch:
+          key:
+            column_net: P14
+      rows:
+        stretch:
+          rotate: 0
+          key:
+            row_net: P6
+    thumbfan:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [-44, -ky]
+      columns:
+        near:
+          key:
+            column_net: P17
+        home:
+          spread: kx
+          rotate: 0
+          key:
+            column_net: P16
+        far:
+          spread: kx
+          rotate: 0
+          stagger: -2
+          key:
+            column_net: P15
+        cmd:
+          spread: 20.25
+          rotate: -25
+          origin: [-3.5, -8]
+          key:
+            column_net: P14
+      rows:
+        thumb:
+          key:
+            row_net: P8
+  rotate: 0
+  mirror:
+    ref: matrix_pinky_home
+    distance: 293.7529778
+outlines:
+  # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
+  exports:
+    raw:
+      - type: keys
+        side: left
+        size: [kx + px, ky + py]
+        corner: px
+    thumbfan_glue:
+      - type: polygon
+        points:
+          - ref: bonus_stretch_stretch
+            shift: [0.5 kx + .5px, -0.5 ky + 0.5 py]
+          - ref: thumbfan_cmd_thumb
+            shift: [.5 kx, 0.5 ky + 0.5 py]
+          - ref: thumbfan_cmd_thumb
+            shift: [0.5 kx - 0.5px, -0.5 ky - 0.5 py]
+          - ref: thumbfan_far_thumb
+            shift: [0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+          - ref: thumbfan_far_thumb
+            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+          - ref: thumbfan_near_thumb
+            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+          - ref: matrix_pinky_bottom
+            shift: [0.5 kx - 0.5 py, -0.5 ky - 0.5 py]
+          - ref: matrix_pinky_home
+          - ref: matrix_inner_home
+    controller_area:
+      main:
+        type: rectangle
+        anchor:
+          ref:
+            - matrix_inner_stretch
+          shift: [0 kx, -3.95 ky]
+        size: [32, 76.5]
+        corner: px
+    switches:
+      main:
+        type: keys
+        side: left
+        size: 14
+        bound: false
+    keycaps:
+      main:
+        type: keys
+        side: left
+        size: [kx, ky]
+        bound: false
+        corner: 1
+    keywell:
+      main:
+        type: outline
+        name: raw
+      thumbfan_glue:
+        type: outline
+        name: thumbfan_glue
+        operation: add
+    base_outline:
+      main:
+        type: outline
+        name: keywell
+      controller:
+        type: outline
+        name: controller_area
+        operation: add
+    screw_holes:
+      top_left:
+        type: circle
+        anchor:
+          - ref: matrix_pinky_top
+            shift: [-0.5 kx, 0.5 ky]
+        radius: 1.05
+      bottom_left:
+        type: circle
+        anchor:
+          - ref: matrix_pinky_bottom
+            shift: [-0.5 kx, 0.5 ky]
+        radius: 1.05
+      top_right:
+        type: circle
+        anchor:
+          - ref: matrix_inner_top
+            shift: [-0.5 kx, 0.5 ky]
+        radius: 1.05
+      palm:
+        type: circle
+        anchor:
+          - ref: matrix_inner_bottom
+            shift: [-0.5 kx, 0.5 ky]
+        radius: 1.05
+      thumb:
+        type: circle
+        anchor:
+          - ref: thumbfan_cmd_thumb
+            shift: [-0.35 kx, 0.55 ky]
+        radius: 1.05
+    mounting_holes:
+      $extends: outlines.exports.screw_holes
+      top_left:
+        radius: 2.05
+      bottom_left:
+        radius: 2.05
+      top_right:
+        radius: 2.05
+      palm:
+        radius: 2.05
+      thumb:
+        radius: 2.05
+    bottom_outline:
+      main:
+        type: outline
+        name: base_outline
+      screw_holes:
+        type: outline
+        # TODO use footprints with pad + via reinforcement as mounting holes
+        name: screw_holes
+        operation: subtract
+    plate:
+      main:
+        type: outline
+        name: keywell
+      switches:
+        type: outline
+        name: switches
+        operation: subtract
+      mounting_holes:
+        type: outline
+        # TODO use footprints with pad + via reinforcement as mounting holes
+        name: screw_holes
+        operation: subtract
+    pcb:
+      main:
+        type: outline
+        name: base_outline
+      mounting_holes:
+        type: outline
+        # TODO use plated through hole footprints as mounting holes
+        name: mounting_holes
+        operation: subtract
+
