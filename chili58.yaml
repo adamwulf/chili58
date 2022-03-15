@@ -3,6 +3,7 @@ units:
   ky: cy
   px: 2
   py: 2
+  step: .05
 points:
   key:
     footprints:
@@ -13,10 +14,8 @@ points:
           reverse: true
           keycaps: true
         nets:
-          # from: P1
-          # to: P2
-          from: =colrow
-          to: =column_net
+          from: GND
+          to: =name
       diode:
         type: diode
         nets:
@@ -28,99 +27,78 @@ points:
           shift: [0, -5]
   zones:
     matrix:
-      key.padding: ky
-      anchor:
-        rotate: 0
       columns:
         outer:
-          stagger: 0
-          key:
-            column_net: P20
         pinky:
-          spread: kx
+          spread: kx + step
           stagger: 3
-          key:
-            column_net: P19
         ring:
-          spread: kx
+          spread: kx + step
           stagger: 5
-          key:
-            column_net: P18
         middle:
-          spread: kx
+          spread: kx + step
           stagger: 2
-          key:
-            column_net: P17
         index:
-          spread: kx
+          spread: kx + step
           stagger: -2
-          key:
-            column_net: P16
         inner:
-          spread: kx
+          spread: kx + step
           stagger: -3
-          key:
-            column_net: P15
       rows:
         bottom:
-          key:
-            row_net: P7
+          padding: ky + step
         home:
-          spread: cy
-          key:
-            row_net: P6
+          padding: ky + step
         top:
-          key:
-            row_net: P5
+          padding: ky + step
         stretch:
-          key:
-            row_net: P4
-    bonus:
+          padding: ky + step
+    thumb:
       anchor:
-        ref: matrix_pinky_home
-        shift: [5kx, -8]
+        ref: matrix_index_bottom
+        shift: [-1.85kx, -1.1ky]
       columns:
-        stretch:
-          key:
-            column_net: P14
-      rows:
-        stretch:
-          rotate: 0
-          key:
-            row_net: P6
-    thumbfan:
-      anchor:
-        ref: matrix_inner_bottom
-        shift: [-44, -ky]
-      columns:
-        near:
-          key:
-            column_net: P17
-        home:
-          spread: kx
-          rotate: 0
-          key:
-            column_net: P16
-        far:
-          spread: kx
-          rotate: 0
+        tucky1:
+          key.name: thumb_tucky1
+        tucky2:
+          key.name: thumb_tucky2
+        tucky3:
           stagger: -2
-          key:
-            column_net: P15
-        cmd:
-          spread: 20.25
+          key.name: thumb_tucky3
+        reachy:
+          spread: kx
           rotate: -25
-          origin: [-3.5, -8]
-          key:
-            column_net: P14
-      rows:
-        thumb:
-          key:
-            row_net: P8
-  rotate: 0
-  mirror:
-    ref: matrix_pinky_home
-    distance: 293.7529778
+          origin: [.1kx, -1.7ky]
+          key.name: thumb_reachy
+pcbs:
+  simple_split:
+    footprints:
+      - type: promicro
+        anchor:
+          - ref: matrix_inner_home
+            shift: [1U, 0.5U]
+            rotate: -90
+        nets:
+          P1:
+          P0: matrix_pinky_bottom
+          P2: matrix_pinky_home
+          P3: matrix_pinky_top
+          P4: matrix_ring_bottom
+          P5: matrix_ring_home
+          P6: matrix_ring_top
+          P7: matrix_middle_bottom
+          P8: matrix_middle_home
+          P9: matrix_middle_top
+          P21: matrix_index_bottom
+          P20: matrix_index_home
+          P19: matrix_index_top
+          P18: matrix_inner_bottom
+          P15: matrix_inner_home
+          P14: matrix_inner_top
+          P13: thumb_tucky1
+          P12: thumb_tucky2
+          P11: thumb_tucky3
+          P10: thumb_reachy
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
@@ -129,25 +107,6 @@ outlines:
         side: left
         size: [kx + px, ky + py]
         corner: px
-    thumbfan_glue:
-      - type: polygon
-        points:
-          - ref: bonus_stretch_stretch
-            shift: [0.5 kx + .5px, -0.5 ky + 0.5 py]
-          - ref: thumbfan_cmd_thumb
-            shift: [.5 kx, 0.5 ky + 0.5 py]
-          - ref: thumbfan_cmd_thumb
-            shift: [0.5 kx - 0.5px, -0.5 ky - 0.5 py]
-          - ref: thumbfan_far_thumb
-            shift: [0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
-          - ref: thumbfan_far_thumb
-            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
-          - ref: thumbfan_near_thumb
-            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
-          - ref: matrix_pinky_bottom
-            shift: [0.5 kx - 0.5 py, -0.5 ky - 0.5 py]
-          - ref: matrix_pinky_home
-          - ref: matrix_inner_home
     controller_area:
       main:
         type: rectangle
@@ -157,6 +116,23 @@ outlines:
           shift: [0 kx, -3.95 ky]
         size: [32, 76.5]
         corner: px
+    thumbfan_glue:
+      - type: polygon
+        points:
+          - ref: thumb_reachy
+            shift: [0.5 kx + .5px, -0.5 ky + 0.5 py]
+          - ref: thumb_tucky3
+            shift: [0.5 kx - 0.5px, -0.5 ky - 0.5 py]
+          - ref: thumb_tucky2
+            shift: [0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+          - ref: thumb_tucky2
+            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+          - ref: thumb_tucky1
+            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+          - ref: matrix_pinky_bottom
+            shift: [0.5 kx - 0.5 py, -0.5 ky - 0.5 py]
+          - ref: matrix_pinky_home
+          - ref: matrix_inner_home
     switches:
       main:
         type: keys
@@ -214,7 +190,7 @@ outlines:
       thumb:
         type: circle
         anchor:
-          - ref: thumbfan_cmd_thumb
+          - ref: thumb_reachy
             shift: [-0.35 kx, 0.55 ky]
         radius: 1.05
     mounting_holes:

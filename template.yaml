@@ -1,0 +1,63 @@
+# `U` is a predefined unit of measure that means 19.05mm, which is MX spacing
+points:
+  zones:
+    matrix:
+      columns:
+        pinky:
+        ring.stagger: 0.66U
+        middle.stagger: 0.25U
+        index.stagger: -0.25U
+        inner.stagger: -0.15U
+      rows:
+        bottom.spread: U
+        home.spread: U
+        top.spread: U
+    thumb:
+      anchor:
+        ref: matrix_index_bottom
+        shift: [0.66U, -1.25U]
+        rotate: -10
+      columns:
+        tucky:
+          key.name: thumb_tucky
+        reachy:
+          spread: U
+          rotate: -15
+          origin: [-0.5U, -0.5U]
+          key.name: thumb_reachy
+  key:
+    footprints:
+      - type: mx
+        nets:
+          from: GND
+          to: =name
+        params:
+          reverse: true
+          keycaps: true
+pcbs:
+  simple_split:
+    footprints:
+      - type: promicro
+        anchor:
+          - ref: matrix_inner_home
+            shift: [1U, 0.5U]
+            rotate: -90
+        nets:
+          P1:
+          P0: matrix_pinky_bottom
+          P2: matrix_pinky_home
+          P3: matrix_pinky_top
+          P4: matrix_ring_bottom
+          P5: matrix_ring_home
+          P6: matrix_ring_top
+          P7: matrix_middle_bottom
+          P8: matrix_middle_home
+          P9: matrix_middle_top
+          P21: matrix_index_bottom
+          P20: matrix_index_home
+          P19: matrix_index_top
+          P18: matrix_inner_bottom
+          P15: matrix_inner_home
+          P14: matrix_inner_top
+          P16: thumb_tucky
+          P10: thumb_reachy
