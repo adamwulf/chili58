@@ -22,54 +22,87 @@ points:
           # from: P3
           # to: P4
           from: =colrow
-          to: =row_net
+          to: =column_net
         anchor:
           shift: [0, -5]
   zones:
     matrix:
       columns:
         outer:
+          key:
+            column_net: P20
         pinky:
           spread: kx + step
           stagger: 3
+          key:
+            column_net: P19
         ring:
           spread: kx + step
           stagger: 5
+          key:
+            column_net: P18
         middle:
           spread: kx + step
           stagger: 2
+          key:
+            column_net: P17
         index:
           spread: kx + step
           stagger: -2
+          key:
+            column_net: P16
         inner:
           spread: kx + step
           stagger: -3
+          key:
+            column_net: P15
       rows:
         bottom:
           padding: ky + step
+          key:
+            row_net: P7
         home:
           padding: ky + step
+          key:
+            row_net: P6
         top:
           padding: ky + step
+          key:
+            row_net: P5
         stretch:
           padding: ky + step
+          key:
+            row_net: P4
     thumb:
       anchor:
         ref: matrix_index_bottom
         shift: [-1.85kx, -1.1ky]
       columns:
         tucky1:
-          key.name: thumb_tucky1
+          key:
+            column_net: P14
+            name: thumb_tucky1
         tucky2:
-          key.name: thumb_tucky2
+          key:
+            column_net: P13
+            name: thumb_tucky2
         tucky3:
           stagger: -2
-          key.name: thumb_tucky3
+          key:
+            column_net: P12
+            name: thumb_tucky3
         reachy:
           spread: kx
           rotate: -25
           origin: [.1kx, -1.7ky]
-          key.name: thumb_reachy
+          key:
+            column_net: P11
+            name: thumb_reachy
+      rows:
+        stretch:
+          rotate: 0
+          key:
+            row_net: P3
 pcbs:
   simple_split:
     footprints:
@@ -78,27 +111,6 @@ pcbs:
           - ref: matrix_inner_home
             shift: [1U, 0.5U]
             rotate: -90
-        nets:
-          P1:
-          P0: matrix_pinky_bottom
-          P2: matrix_pinky_home
-          P3: matrix_pinky_top
-          P4: matrix_ring_bottom
-          P5: matrix_ring_home
-          P6: matrix_ring_top
-          P7: matrix_middle_bottom
-          P8: matrix_middle_home
-          P9: matrix_middle_top
-          P21: matrix_index_bottom
-          P20: matrix_index_home
-          P19: matrix_index_top
-          P18: matrix_inner_bottom
-          P15: matrix_inner_home
-          P14: matrix_inner_top
-          P13: thumb_tucky1
-          P12: thumb_tucky2
-          P11: thumb_tucky3
-          P10: thumb_reachy
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
