@@ -3,7 +3,7 @@ units:
   ky: cy
   px: 2
   py: 2
-  step: .05
+  step: .5
 points:
   key:
     footprints:
@@ -76,7 +76,7 @@ points:
     thumb:
       anchor:
         ref: matrix_index_bottom
-        shift: [-1.85kx, -1.1ky]
+        shift: [-1.85kx, -1.2ky]
       columns:
         tucky1:
           key:
@@ -114,12 +114,12 @@ pcbs:
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
-    raw:
+    area_key_margin:
       - type: keys
         side: left
         size: [kx + px, ky + py]
         corner: px
-    controller_area:
+    area_controller:
       main:
         type: rectangle
         anchor:
@@ -128,7 +128,7 @@ outlines:
           shift: [0 kx, -3.95 ky]
         size: [32, 76.5]
         corner: px
-    thumbfan_glue:
+    area_thumbfan:
       - type: polygon
         points:
           - ref: thumb_reachy
@@ -161,10 +161,10 @@ outlines:
     keywell:
       main:
         type: outline
-        name: raw
-      thumbfan_glue:
+        name: area_key_margin
+      area_thumbfan:
         type: outline
-        name: thumbfan_glue
+        name: area_thumbfan
         operation: add
     base_outline:
       main:
@@ -172,7 +172,7 @@ outlines:
         name: keywell
       controller:
         type: outline
-        name: controller_area
+        name: area_controller
         operation: add
     screw_holes:
       top_left:
@@ -217,7 +217,7 @@ outlines:
         radius: 2.05
       thumb:
         radius: 2.05
-    bottom_outline:
+    plate_bottom:
       main:
         type: outline
         name: base_outline
@@ -226,7 +226,7 @@ outlines:
         # TODO use footprints with pad + via reinforcement as mounting holes
         name: screw_holes
         operation: subtract
-    plate:
+    plate_top:
       main:
         type: outline
         name: keywell
@@ -242,10 +242,9 @@ outlines:
     pcb:
       main:
         type: outline
-        name: base_outline
+        name: keywell
       mounting_holes:
         type: outline
         # TODO use plated through hole footprints as mounting holes
         name: mounting_holes
         operation: subtract
-
