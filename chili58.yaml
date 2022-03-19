@@ -73,28 +73,39 @@ points:
           padding: ky + step
           key:
             row_net: P4
+    reach:
+      anchor:
+        ref: matrix_inner_home
+        shift: [1kx + 1step, -0.5ky]
+      columns:
+        reach:
+          key:
+            column_net: P14
+            name: index_reach
     thumb:
       anchor:
         ref: matrix_index_bottom
-        shift: [-1.85kx, -1.2ky]
+        shift: [-2.65kx, -1.3ky]
       columns:
         tucky1:
+          spread: kx + step
           key:
             column_net: P14
             name: thumb_tucky1
         tucky2:
+          spread: kx + step
           key:
             column_net: P13
             name: thumb_tucky2
         tucky3:
           stagger: -2
+          spread: kx + step
           key:
             column_net: P12
             name: thumb_tucky3
         reachy:
-          spread: kx
           rotate: -25
-          origin: [.1kx, -1.7ky]
+          origin: [.1kx, -0.85ky]
           key:
             column_net: P11
             name: thumb_reachy
