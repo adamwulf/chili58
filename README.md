@@ -8,6 +8,7 @@ This design is a work in progress, and is by no means complete or even functiona
 
 1. Paste yaml into https://ergogen.cache.works/ and generate PCB.
 2. Open pcb file in KiCad, and route all connections
+   - Inspect Menu -> Design Rules Checker -> Run DRC -> Confirm no errors
 3. generate gerber files
 4. upload to print PCB somewhere (?)
 5. upload edge cuts to cut acrylic case somewhere (?)

@@ -213,13 +213,13 @@ outlines:
         type: circle
         anchor:
           - ref: matrix_inner_top
-            shift: [-0.5 kx, 0.5 ky]
+            shift: [-0.5 kx, 0.75 ky]
         radius: 1.05
       palm:
         type: circle
         anchor:
           - ref: matrix_inner_bottom
-            shift: [-0.5 kx, 0.5 ky]
+            shift: [-0.5 kx, 0.75 ky]
         radius: 1.05
       thumb:
         type: circle
