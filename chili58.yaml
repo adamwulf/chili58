@@ -109,8 +109,8 @@ points:
             column_net: P11
             name: thumb_tucky3
         reachy:
-          rotate: -25
-          origin: [.1kx, -0.85ky]
+          rotate: -115
+          origin: [0.25kx, -0.1ky]
           key:
             column_net: P10
             name: thumb_reachy
@@ -122,11 +122,26 @@ points:
 pcbs:
   simple_split:
     footprints:
-      - type: promicro
+      mcu:
+        type: promicro
         anchor:
           - ref: matrix_inner_home
             shift: [1U, 0.5U]
             rotate: -90
+      reset:
+        type: button
+        params:
+          side: F
+        nets:
+          from: RST
+          to: GND
+        anchor:
+          ref:
+            - matrix_inner_home
+          shift: [1U, 0.5U]
+    outlines:
+      main:
+        outline: pcb_edge
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
@@ -144,23 +159,31 @@ outlines:
           shift: [0 kx, -3.95 ky]
         size: [32, 76.5]
         corner: px
-    area_thumbfan:
+    area_top_plate:
       - type: polygon
         points:
+          - ref: matrix_outer_stretch
+            shift: [-0.5 kx - 0.5px, 0.5 ky + 0.5 py]
+          - ref: matrix_middle_stretch
+            shift: [-1 kx - 0.5px, 0.5 ky + 0.5 py]
+          - ref: matrix_middle_stretch
+            shift: [2.5 kx + 0.7px, 0.5 ky + 0.5 py]
+          - ref: index_reach
+            shift: [-0.45 kx - 0.5px, 0.5 ky + 0.5 py]
+          - ref: index_reach
+            shift: [0.5 kx + 0.5px, 0.5 ky + 0.5 py]
+          - ref: index_reach
+            shift: [0.5 kx + 0.5px, -1.5 ky - 0.5 py]
           - ref: thumb_reachy
-            shift: [0.5 kx + .5px, -0.5 ky + 0.5 py]
-          - ref: thumb_tucky3
-            shift: [0.5 kx - 0.5px, -0.5 ky - 0.5 py]
-          - ref: thumb_tucky2
-            shift: [0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
-          - ref: thumb_tucky2
-            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
+            shift: [0.95 kx + 0.5px, 0.5 ky + 0.5 py]
+          - ref: thumb_reachy
+            shift: [0.95 kx + 0.5px, -0.5 ky - 0.5 py]
           - ref: thumb_tucky1
-            shift: [-0.5 kx + 0.5 px, -0.5 ky - 0.5 py]
-          - ref: matrix_pinky_bottom
-            shift: [0.5 kx - 0.5 py, -0.5 ky - 0.5 py]
-          - ref: matrix_pinky_home
-          - ref: matrix_inner_home
+            shift: [-0.5 kx - 0.5px, -0.5 ky - 2.1 py]
+          - ref: matrix_outer_bottom
+            shift: [2 kx - 0.5 px, -0.5 ky - 0.5 py]
+          - ref: matrix_outer_bottom
+            shift: [-0.5 kx - 0.5 px, -0.5 ky - 0.5 py]
     switches:
       main:
         type: keys
@@ -178,10 +201,6 @@ outlines:
       main:
         type: outline
         name: area_key_margin
-      area_thumbfan:
-        type: outline
-        name: area_thumbfan
-        operation: add
     base_outline:
       main:
         type: outline
@@ -219,7 +238,7 @@ outlines:
         type: circle
         anchor:
           - ref: thumb_reachy
-            shift: [-0.35 kx, 0.55 ky]
+            shift: [-0.55 kx, -0.35 ky]
         radius: 1.05
     mounting_holes:
       $extends: outlines.exports.screw_holes
@@ -236,7 +255,11 @@ outlines:
     plate_bottom:
       main:
         type: outline
-        name: base_outline
+        name: area_top_plate
+      area_reach:
+        type: outline
+        name: area_controller
+        operation: add
       screw_holes:
         type: outline
         # TODO use footprints with pad + via reinforcement as mounting holes
@@ -245,7 +268,7 @@ outlines:
     plate_top:
       main:
         type: outline
-        name: keywell
+        name: area_top_plate
       switches:
         type: outline
         name: switches
@@ -255,10 +278,10 @@ outlines:
         # TODO use footprints with pad + via reinforcement as mounting holes
         name: screw_holes
         operation: subtract
-    pcb:
+    pcb_edge:
       main:
         type: outline
-        name: keywell
+        name: area_top_plate
       mounting_holes:
         type: outline
         # TODO use plated through hole footprints as mounting holes
