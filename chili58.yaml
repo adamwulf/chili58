@@ -145,11 +145,6 @@ pcbs:
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
-    area_key_margin:
-      - type: keys
-        side: left
-        size: [kx + px, ky + py]
-        corner: px
     area_controller:
       main:
         type: rectangle
@@ -171,9 +166,9 @@ outlines:
           - ref: matrix_inner_home
             shift: [0.5 kx + 0.5px, 0 ky + 0.5 py]
           - ref: index_reach
-            shift: [0.5 kx + 0.5px, 0.5 ky + 0.5 py]
+            shift: [0.5 kx + 1.25px, 0.5 ky + 0.5 py]
           - ref: index_reach
-            shift: [0.5 kx + 0.5px, -1.5 ky - 0.5 py]
+            shift: [0.5 kx + 1.25px, -1.5 ky + 1 py]
           - ref: thumb_reachy
             shift: [0.7 kx + 0.5px, 0.5 ky + 0.5 py]
           - ref: thumb_tucky1
@@ -184,31 +179,23 @@ outlines:
             shift: [2 kx - 0.6 px, -0.5 ky - 0.5 py]
           - ref: matrix_outer_bottom
             shift: [-0.5 kx - 0.5 px, -0.5 ky - 0.5 py]
+    area_mcu:
+      - type: polygon
+        points:
+          - ref: matrix_middle_stretch
+            shift: [2.5 kx + 1px, 0.5 ky + 0.5 py]
+          - ref: matrix_middle_stretch
+            shift: [3.5 kx + 2px, 0.5 ky + 0.5 py]
+          - ref: matrix_inner_home
+            shift: [1.5 kx + 1.5px, 0 ky + 0.5 py]
+          - ref: matrix_inner_home
+            shift: [0.5 kx + 0.5px, 0 ky + 0.5 py]
     switches:
       main:
         type: keys
         side: left
         size: 14
         bound: false
-    keycaps:
-      main:
-        type: keys
-        side: left
-        size: [kx, ky]
-        bound: false
-        corner: 1
-    keywell:
-      main:
-        type: outline
-        name: area_key_margin
-    base_outline:
-      main:
-        type: outline
-        name: keywell
-      controller:
-        type: outline
-        name: area_controller
-        operation: add
     screw_holes:
       top_left:
         type: circle
@@ -258,7 +245,7 @@ outlines:
         name: area_top_plate
       area_reach:
         type: outline
-        name: area_controller
+        name: area_mcu
         operation: add
       screw_holes:
         type: outline
@@ -282,6 +269,10 @@ outlines:
       main:
         type: outline
         name: area_top_plate
+      area_reach:
+        type: outline
+        name: area_mcu
+        operation: add
       mounting_holes:
         type: outline
         # TODO use plated through hole footprints as mounting holes
