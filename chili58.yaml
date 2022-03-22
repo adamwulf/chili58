@@ -110,7 +110,7 @@ points:
             name: thumb_tucky3
         reachy:
           rotate: -115
-          origin: [0.25kx, -0.1ky]
+          origin: [0.15kx, -0.2ky]
           key:
             column_net: P10
             name: thumb_reachy
@@ -126,7 +126,7 @@ pcbs:
         type: promicro
         anchor:
           - ref: matrix_inner_home
-            shift: [1U, 0.5U]
+            shift: [1kx + 1px, 1.75ky]
             rotate: -90
       reset:
         type: button
@@ -138,7 +138,7 @@ pcbs:
         anchor:
           ref:
             - matrix_inner_home
-          shift: [1U, 0.5U]
+          shift: [1.3kx + 1px, 0.5ky]
     outlines:
       main:
         outline: pcb_edge
@@ -167,21 +167,21 @@ outlines:
           - ref: matrix_middle_stretch
             shift: [-1 kx - 0.5px, 0.5 ky + 0.5 py]
           - ref: matrix_middle_stretch
-            shift: [2.5 kx + 0.7px, 0.5 ky + 0.5 py]
-          - ref: index_reach
-            shift: [-0.45 kx - 0.5px, 0.5 ky + 0.5 py]
+            shift: [2.5 kx + 1px, 0.5 ky + 0.5 py]
+          - ref: matrix_inner_home
+            shift: [0.5 kx + 0.5px, 0 ky + 0.5 py]
           - ref: index_reach
             shift: [0.5 kx + 0.5px, 0.5 ky + 0.5 py]
           - ref: index_reach
             shift: [0.5 kx + 0.5px, -1.5 ky - 0.5 py]
           - ref: thumb_reachy
-            shift: [0.95 kx + 0.5px, 0.5 ky + 0.5 py]
-          - ref: thumb_reachy
-            shift: [0.95 kx + 0.5px, -0.5 ky - 0.5 py]
+            shift: [0.7 kx + 0.5px, 0.5 ky + 0.5 py]
           - ref: thumb_tucky1
-            shift: [-0.5 kx - 0.5px, -0.5 ky - 2.1 py]
+            shift: [2.75 kx - 0.5px, -0.5 ky - 1.75 py]
+          - ref: thumb_tucky1
+            shift: [-0.5 kx - 0.5px, -0.5 ky - 1.75 py]
           - ref: matrix_outer_bottom
-            shift: [2 kx - 0.5 px, -0.5 ky - 0.5 py]
+            shift: [2 kx - 0.6 px, -0.5 ky - 0.5 py]
           - ref: matrix_outer_bottom
             shift: [-0.5 kx - 0.5 px, -0.5 ky - 0.5 py]
     switches:
