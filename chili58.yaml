@@ -128,10 +128,27 @@ pcbs:
           - ref: matrix_inner_home
             shift: [1kx + 1px, 1.75ky]
             rotate: -90
+        params:
+          reverse: true
+      trss:
+        type: trrs
+        anchor:
+          - ref: matrix_inner_home
+            shift: [1kx + 1px, 1ky]
+            rotate: 0
+        nets:
+          A: GND
+          B: GND
+          C: P0
+          D: VCC
+        params:
+          reverse: true
+          symmetric: true
       reset:
         type: button
         params:
           side: F
+          reverse: true
         nets:
           from: RST
           to: GND
