@@ -14,15 +14,13 @@ points:
           reverse: true
           keycaps: true
         nets:
-          from: GND
-          to: =name
+          from: =colrow
+          to: =column_net
       diode:
         type: diode
         nets:
-          # from: P3
-          # to: P4
           from: =colrow
-          to: =column_net
+          to: =row_net
         anchor:
           shift: [0, -5]
   zones:
@@ -30,49 +28,45 @@ points:
       columns:
         outer:
           key:
-            column_net: P18
+            column_net: P19
         pinky:
           spread: kx + step
           stagger: 3
           key:
-            column_net: P17
+            column_net: P18
         ring:
           spread: kx + step
           stagger: 5
           key:
-            column_net: P16
+            column_net: P15
         middle:
           spread: kx + step
           stagger: 2
           key:
-            column_net: P15
+            column_net: P14
         index:
           spread: kx + step
           stagger: -2
           key:
-            column_net: P14
+            column_net: P16
         inner:
           spread: kx + step
           stagger: -3
           key:
-            column_net: P13
+            column_net: P10
       rows:
         bottom:
           padding: ky + step
-          key:
-            row_net: P11
+          row_net: P8
         home:
           padding: ky + step
-          key:
-            row_net: P10
+          row_net: P7
         top:
           padding: ky + step
-          key:
-            row_net: P9
+          row_net: P6
         stretch:
           padding: ky + step
-          key:
-            row_net: P8
+          row_net: P5
     reach:
       anchor:
         ref: matrix_inner_home
@@ -80,13 +74,14 @@ points:
       columns:
         reach:
           key:
-            column_net: P13
+            column_net: P10
             name: index_reach
       rows:
         reach:
           rotate: 0
+          row_net: P9
           key:
-            row_net: P12
+            name: reach
     thumb:
       anchor:
         ref: matrix_index_bottom
@@ -95,35 +90,36 @@ points:
         tucky1:
           spread: kx + step
           key:
-            column_net: P17
+            column_net: P15
             name: thumb_tucky1
         tucky2:
           spread: kx + step
           key:
-            column_net: P16
+            column_net: P14
             name: thumb_tucky2
         tucky3:
           stagger: -2
           spread: kx + step
           key:
-            column_net: P15
+            column_net: P16
             name: thumb_tucky3
         reachy:
           rotate: -115
           origin: [0.15kx, -0.2ky]
           key:
-            column_net: P14
+            column_net: P10
             name: thumb_reachy
       rows:
         stretch:
           rotate: 0
+          row_net: P9
           key:
-            row_net: P12
+            name: thumb
 pcbs:
   simple_split:
     footprints:
       mcu:
-        type: promicro
+        type: elitec
         anchor:
           - ref: matrix_inner_home
             shift: [1kx + 1px, 1.75ky]
