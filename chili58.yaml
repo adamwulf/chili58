@@ -4,6 +4,9 @@ units:
   px: 2
   py: 2
   step: .5
+# Shift ergogen output into Kicad drawing frame
+  frame_shift_x: 140
+  frame_shift_y: -160
 points:
   key:
     footprints:
@@ -25,6 +28,8 @@ points:
           shift: [0, -5]
   zones:
     matrix:
+      anchor:
+        shift: [frame_shift_x, frame_shift_y]
       columns:
         outer:
           key:
@@ -116,7 +121,7 @@ points:
           key:
             name: thumb
 pcbs:
-  simple_split:
+  chili58:
     footprints:
       mcu:
         type: elitec
