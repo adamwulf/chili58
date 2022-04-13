@@ -163,16 +163,7 @@ pcbs:
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
-    area_controller:
-      main:
-        type: rectangle
-        anchor:
-          ref:
-            - matrix_inner_stretch
-          shift: [0 kx, -3.95 ky]
-        size: [32, 76.5]
-        corner: px
-    area_top_plate:
+    shape_top_plate:
       - type: polygon
         points:
           - ref: matrix_outer_stretch
@@ -197,17 +188,25 @@ outlines:
             shift: [2 kx - 0.6 px, -0.5 ky - 0.5 py]
           - ref: matrix_outer_bottom
             shift: [-0.5 kx - 0.5 px, -0.5 ky - 0.5 py]
-    area_mcu:
+    area_top_plate:
+      - type: outline
+        name: shape_top_plate
+        fillet: 2
+    shape_mcu:
       - type: polygon
         points:
           - ref: matrix_middle_stretch
-            shift: [2.5 kx + 1px, 0.5 ky + 0.5 py]
+            shift: [2 kx + 1px, 0.5 ky + 0.5 py]
           - ref: matrix_middle_stretch
             shift: [3.5 kx + 2px, 0.5 ky + 0.5 py]
           - ref: matrix_inner_home
-            shift: [1.5 kx + 1.5px, 0 ky + 0.5 py]
+            shift: [1.5 kx + 1.5px, -0.5 ky + 0.5 py]
           - ref: matrix_inner_home
-            shift: [0.5 kx + 0.5px, 0 ky + 0.5 py]
+            shift: [0 kx + 0.5px, -0.5 ky + 0.5 py]
+    area_mcu:
+      - type: outline
+        name: shape_mcu
+        fillet: 2
     switches:
       main:
         type: keys
