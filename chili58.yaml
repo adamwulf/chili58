@@ -159,7 +159,7 @@ pcbs:
           shift: [1.3kx + 1px, -1.5ky]
     outlines:
       main:
-        outline: pcb_edge
+        outline: bottom_plate
 outlines:
   # board dimensions according to JLCPCB: 122.28 mm x 101.05 mm
   exports:
@@ -282,7 +282,7 @@ outlines:
         # TODO use footprints with pad + via reinforcement as mounting holes
         name: screw_holes
         operation: subtract
-    pcb_edge:
+    bottom_plate:
       main:
         type: outline
         name: area_top_plate
